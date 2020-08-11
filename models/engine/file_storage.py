@@ -48,7 +48,7 @@ class FileStorage():
         if cls is not None:
             new_dic = {}
             for key, value in self.__objects.items():
-                if key.split(".")[0] == cls:
+                if key.split(".")[0] == cls or value.__name__.__class__ == cls:
                     new_dic[key] = value
                     return new_dic
         return self.__objects
