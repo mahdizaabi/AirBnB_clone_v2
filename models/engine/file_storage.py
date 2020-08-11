@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-FileStorage class file
+FileStorage class definition attributs and methods
 """
 from models.base_model import BaseModel
 from models.user import User
@@ -31,10 +31,6 @@ class FileStorage():
     __file_path = 'file.json'
     #objects dictionary where to save
     __objects = {}
-
-    kryptix = ''
-    cll = [BaseModel, User, State, City, Amenity, Place, Review]
-    strx = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
 
     def all(self, cls=None):
         """
