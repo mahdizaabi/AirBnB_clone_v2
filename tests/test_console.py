@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """Defines unittests for console.py."""
 import os
-import pep8 
+import pep8
 import unittest
 import models
 from unittest.mock import patch
 from io import StringIO
 from console import HBNBCommand
 from models.engine.file_storage import FileStorage
+
 
 class TestHBNBCommand(unittest.TestCase):
     """suite of test for the console"""
@@ -49,6 +50,21 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertIn("'number_rooms': 4", output)
             self.assertIn("'latitude': 37.77", output)
             self.assertNotIn("'longitude'", output)
+
+    def test_input_double_quote_escaping(self):
+        """test input format"""
+
+        self.HBNB = HBNBCommand()
+        with patch("sys.stdout", new=StringIO()) as f:
+            input = ('create City name="here_dd" number="3"')
+            self.HBNB.onecmd(input)
+            out = f.getvalue().strip()
+        with patch("sys.stdout", new=StringIO()) as f:
+            self.HBNB.onecmd("all City")
+            output = f.getvalue()
+            self.assertIn(out, output)
+            self.assertIn("'name': 'here dd'", output)
+            self.assertIn("'number': 3", output)
 
 if __name__ == "__main__":
     unittest.main()
