@@ -97,10 +97,8 @@ class HBNBCommand(cmd.Cmd):
 
     #def postcmd(self, stop, line):
         #"""Prints if isatty is false"""
-        #if not sys.__stdin__.isatty():
-        #    #print('(hbnb) ', end='')
-        return stop
-
+        #if not sys.__stdin__.isatty()
+        #return stop
     def do_quit(self, command):
         """ Method to exit the HBNB console"""
         exit()
@@ -151,8 +149,11 @@ class HBNBCommand(cmd.Cmd):
                 if flag == 0:
                     new_dic[item.split("=")[0]] = item.split("=")[1]
             elif item.split("=")[1].isnumeric():
-                x = int(item.split("=")[1])
-                new_dic[item.split("=")[0]] = x
+                if item.split("=")[1][0] == 0:
+                    new_dic[item.split("=")[0]] = x
+                else:
+                    x = int(item.split("=")[1])
+                    new_dic[item.split("=")[0]] = x
             else:
                 try:
                     d = float(item.split("=")[1])
