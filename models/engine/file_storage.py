@@ -50,7 +50,7 @@ class FileStorage():
             for key, value in self.__objects.items():
                 if key.split(".")[0] == cls or value.__class__ == cls:
                     new_dic[key] = value
-                    return new_dic
+                return new_dic
         return self.__objects
 
     def new(self, obj):
