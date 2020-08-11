@@ -124,6 +124,5 @@ class FileStorage():
         """
 
         if obj is not None:
-            keyx = obj.__class__.__name__ + "." + obj.id
-        if keyx in self.__objects:
+            keyx = "{}.{}".format(type(obj).__name__, obj.id)
             del self.__objects[keyx]
