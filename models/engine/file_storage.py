@@ -70,7 +70,6 @@ class FileStorage():
         """
 
         if obj is not None:
-            print("heeey")
             keyx = obj.__class__.__name__ + "." + obj.id
             self.__objects[keyx] = obj
             FileStorage.kryptix = obj.__class__.__name__
@@ -107,7 +106,7 @@ class FileStorage():
             found in the file into the attribute
             '__objects'
         """
-        print('xxxxxxx')
+
         try:
             with open(self.__file_path, 'r') as fx:
                 d = json.load(fx)
