@@ -8,6 +8,7 @@ from models.base_model import BaseModel
 from models import storage
 import os
 
+
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
 
