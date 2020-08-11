@@ -36,7 +36,7 @@ class FileStorage():
     cll = [BaseModel, User, State, City, Amenity, Place, Review]
     strx = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
 
-    def all(self):
+    def all(self, cls=None):
         """
         ---------------------------
         PUBLIC INSTANCE METHOD: ALL
@@ -48,6 +48,12 @@ class FileStorage():
             @self: current instance
         """
 
+        if cls is not None:
+            new_dic = {}
+            for key, value in self.__objects.items():
+                if value.__class__ == cls:
+                    new_dic[key] = value
+            return new_dic
         return self.__objects
 
     def new(self, obj):
@@ -64,6 +70,7 @@ class FileStorage():
         """
 
         if obj is not None:
+            print("heeey")
             keyx = obj.__class__.__name__ + "." + obj.id
             self.__objects[keyx] = obj
             FileStorage.kryptix = obj.__class__.__name__
@@ -100,7 +107,7 @@ class FileStorage():
             found in the file into the attribute
             '__objects'
         """
-
+        print('xxxxxxx')
         try:
             with open(self.__file_path, 'r') as fx:
                 d = json.load(fx)
@@ -110,3 +117,11 @@ class FileStorage():
 
         except FileNotFoundError:
             pass
+
+    def delete(self, obj=None):
+        """Delete obj from __object"""
+
+        if obj is not None:
+            keyx = obj.__class__.__name__ + "." + obj.id
+        if keyx in self.__objects:
+            del self.__objects[keyx]
