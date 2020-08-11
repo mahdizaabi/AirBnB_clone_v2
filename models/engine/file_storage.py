@@ -42,6 +42,7 @@ class FileStorage():
             the attribute '__objects'
         ARGS:
             @self: current instance
+            @cls: classe of the object
         """
 
         if cls is not None:
