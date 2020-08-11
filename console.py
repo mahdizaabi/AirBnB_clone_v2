@@ -149,8 +149,8 @@ class HBNBCommand(cmd.Cmd):
                 if flag == 0:
                     new_dic[item.split("=")[0]] = item.split("=")[1]
             elif item.split("=")[1].isnumeric():
-                if item.split("=")[1][0] == 0:
-                    new_dic[item.split("=")[0]] = x
+                if item.split("=")[1][0] == '0':
+                    new_dic[item.split("=")[0]] = item.split("=")[1]
                 else:
                     x = int(item.split("=")[1])
                     new_dic[item.split("=")[0]] = x
