@@ -118,7 +118,14 @@ class FileStorage():
             pass
 
     def delete(self, obj=None):
-        """Delete obj from __object"""
+        """
+        ------------------------------
+        PUBLIC INSTANCE METHOD: delete
+        ------------------------------
+        DESCRIPTION:
+            delete an object from the
+            object dictionary of fs
+        """
 
         if obj is not None:
             keyx = obj.__class__.__name__ + "." + obj.id
