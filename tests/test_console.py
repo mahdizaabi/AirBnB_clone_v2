@@ -77,5 +77,23 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertIn("'name': 'here dd'", output)
             self.assertIn("'number': 3", output)
 
+    def test_decimal(self):
+        """[test_decimal]
+        """
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('create User number_bathrooms=4')
+            HBNBCommand().onecmd('all User')
+        msg = f.getvalue()[:-1]
+        self.assertTrue("'number_bathrooms': 4" in msg)
+
+    def test_float(self):
+        """[test_float]
+        """
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('create User price=0.069')
+            HBNBCommand().onecmd('all User')
+        msg = f.getvalue()[:-1]
+        self.assertTrue("'price': 0.069" in msg)
+
 if __name__ == "__main__":
     unittest.main()
