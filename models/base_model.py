@@ -49,10 +49,7 @@ class BaseModel:
 
     def to_dict(self):
         """return a dictionnary representation of the class"""
-        #d = self.__dict__.copy()
-        #for k, v in d.items():
-            #if type(v) == int or type(v) == float:
-                #d[k] = str(v)
+        d = self.__dict__.copy()
         d['__class__'] = self.__class__.__name__
         d['created_at'] = self.created_at.isoformat()
         d['updated_at'] = self.updated_at.isoformat()
