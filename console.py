@@ -15,7 +15,6 @@ import shlex
 
 def check_string(s):
     """function to check  for string"""
-
     for i in s:
         if not i.isalpha() and i not in['_', ' ', '\'', '"']:
             return False
@@ -127,12 +126,14 @@ class HBNBCommand(cmd.Cmd):
         m = ""
         z = ""
         new_dic = {}
-
-        if not args:
-            print("** class name missing **")
-            return
-        elif shlex.split(args)[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
+        try:
+            if not args:
+                print("** class name missing **")
+                return
+            elif shlex.split(args)[0] not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+                return
+        except Exception as e:
             return
         for item in shlex.split(args)[1:]:
             if check_string(item.split("=")[1]):
