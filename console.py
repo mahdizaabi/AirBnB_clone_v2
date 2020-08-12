@@ -126,7 +126,8 @@ class HBNBCommand(cmd.Cmd):
         m = ""
         z = ""
         new_dic = {}
-        try:
+
+        try: 
             if not args:
                 print("** class name missing **")
                 return
