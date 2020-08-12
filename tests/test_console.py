@@ -136,5 +136,4 @@ class TestHBNBCommand(unittest.TestCase):
         msg = f.getvalue()[:-1]
         self.assertTrue("'name': 'lothric'" in msg)
 
-if __name__ == "__main__":
-    unittest.main()
+
