@@ -13,6 +13,17 @@ from models.engine.file_storage import FileStorage
 class TestHBNBCommand(unittest.TestCase):
     """suite of test for the console"""
 
+    def setUp(self):
+        """set the up the test"""
+        pass
+
+    def tearDown(self):
+        """end the test"""
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
+
     def test_pep8(self):
         """Test Pep8 styling."""
         style = pep8.StyleGuide(quiet=True)
