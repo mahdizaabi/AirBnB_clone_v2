@@ -76,4 +76,3 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertIn(out, output)
             self.assertIn("'name': 'here dd'", output)
             self.assertIn("'number': 3", output)
-
