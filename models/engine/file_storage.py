@@ -1,128 +1,70 @@
 #!/usr/bin/python3
 """
-FileStorage class definition attributs and methods
+Contains the FileStorage class
 """
-from models.base_model import BaseModel
 
 import json
-from models.state import State
-from models.city import City
-from models.user import User
-from models.place import Place
 from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
 from models.review import Review
+from models.state import State
+from models.user import User
+
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
 
-class FileStorage():
-    """
-    ------------------
-    CLASS: FileStorage
-    ------------------
-    """
+class FileStorage:
+    """serializes instances to a JSON file & deserializes back to instances"""
 
-    # ------------------------------- #
-    #       PUBLIC ATTRIBUTES         #
-    # ------------------------------- #
-
-    #path to the Json file
-    __file_path = 'file.json'
-    #objects dictionary where to save
+    # string - path to the JSON file
+    __file_path = "file.json"
+    # dictionary - empty but will store all objects by <class name>.id
     __objects = {}
 
     def all(self, cls=None):
-        """
-        ---------------------------
-        PUBLIC INSTANCE METHOD: ALL
-        ---------------------------
-        DESCRIPTION:
-            Returns the dictionary stored in
-            the attribute '__objects'
-        ARGS:
-            @self: current instance
-            @cls: classe of the object
-        """
-
+        """returns the dictionary __objects"""
         if cls is not None:
-            new_dic = {}
+            new_dict = {}
             for key, value in self.__objects.items():
-                if key.split(".")[0] == cls or value.__class__ == cls:
-                    new_dic[key] = value
-            return new_dic
+                if cls == value.__class__ or cls == value.__class__.__name__:
+                    new_dict[key] = value
+            return new_dict
         return self.__objects
 
     def new(self, obj):
-        """
-        ---------------------------
-        PUBLIC INSTANCE METHOD: NEW
-        ---------------------------
-        DESCRIPTION:
-            Adds the necessary objects to the
-            '__objects' attribute
-        ARGS:
-            @self: current instance
-            @obj: object to add to '__objects'
-        """
-
+        """sets in __objects the obj with key <obj class name>.id"""
         if obj is not None:
-            keyx = obj.__class__.__name__ + "." + obj.id
-            self.__objects[keyx] = obj
-            FileStorage.kryptix = obj.__class__.__name__
+            key = obj.__class__.__name__ + "." + obj.id
+            self.__objects[key] = obj
 
     def save(self):
-        """
-        ----------------------------
-        PUBLIC INSTANCE METHOD: SAVE
-        ----------------------------
-        DESCRIPTION:
-            Serializes items in __objects to JSON
-            and dumps the output into a file defined
-            by '__file_path'
-        ARGS:
-            @self: current instance
-        """
-
+        """serializes __objects to the JSON file (path: __file_path)"""
         json_objects = {}
-
-        for ob in self.__objects:
-            json_objects[ob] = self.__objects[ob].to_dict()
-
-        with open(self.__file_path, 'w') as filex:
-            json.dump(json_objects, filex)
+        for key in self.__objects:
+            json_objects[key] = self.__objects[key].to_dict()
+        with open(self.__file_path, 'w') as f:
+            json.dump(json_objects, f)
 
     def reload(self):
-        """
-        ------------------------------
-        PUBLIC INSTANCE METHOD: RELOAD
-        ------------------------------
-        DESCRIPTION:
-            Deserializes a JSON file, loads up
-            and loads up all of the instances
-            found in the file into the attribute
-            '__objects'
-        """
-
+        """deserializes the JSON file to __objects"""
         try:
-            with open(self.__file_path, 'r') as fx:
-                d = json.load(fx)
-
-            for x in d.keys():
-                self.__objects[x] = classes[d[x]["__class__"]](**d[x])
-
-        except FileNotFoundError:
+            with open(self.__file_path, 'r') as f:
+                jo = json.load(f)
+            for key in jo:
+                self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
+        except:
             pass
 
     def delete(self, obj=None):
-        """
-        ------------------------------
-        PUBLIC INSTANCE METHOD: delete
-        ------------------------------
-        DESCRIPTION:
-            delete an object from the
-            object dictionary of fs
-        """
-
+        """delete obj from __objects if it’s inside"""
         if obj is not None:
-            keyx = obj.__class__.__name__ + "." + obj.id
-            del self.__objects[keyx]
+            key = obj.__class__.__name__ + '.' + obj.id
+            if key in self.__objects:
+                del self.__objects[key]
+
+    def close(self):
+        """call reload() method for deserializing the JSON file to objects"""
+        self.reload()
