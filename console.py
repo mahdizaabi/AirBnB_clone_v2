@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Console Module """
+from os import getenv
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -45,7 +46,6 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
-
         Usage: <class name>.<command>([<id> [<*args> or <**kwargs>]])
         (Brackets denote optional fields in usage example.)
         """
@@ -127,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
         z = ""
         new_dic = {}
 
-        try: 
+        try:
             if not args:
                 print("** class name missing **")
                 return
@@ -259,6 +259,7 @@ class HBNBCommand(cmd.Cmd):
         print("[", end="")
         print(", ".join(obj_list), end="")
         print("]")
+        print('ok')
 
     def help_all(self):
         """ Help information for the all command """
