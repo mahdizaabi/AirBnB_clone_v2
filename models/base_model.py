@@ -2,14 +2,23 @@
 """
 BaseModel class file
 """
-
+import sqlalchemy
 from datetime import datetime
 import uuid
+import sqlalchemy
 import models
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, String, DateTime
+
+Base = declarative_base()
 
 
 class BaseModel:
     """BaseModel that defines all common attr/methods for other classes:"""
+
+    id = Column(String(60), primary_key=True, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow)
 
     def __init__(self, *args, **kwargs):
         """instance constructor and instance instantiation"""
@@ -43,7 +52,6 @@ class BaseModel:
     def save(self):
         """updates the public instance attribute with the current datetime"""
         self.updated_at = datetime.now()
-        #models.storage.save()
         models.storage.new(self)
         models.storage.save()
 
@@ -53,4 +61,10 @@ class BaseModel:
         d['__class__'] = self.__class__.__name__
         d['created_at'] = self.created_at.isoformat()
         d['updated_at'] = self.updated_at.isoformat()
+        if "_sa_instance_state" in d:
+            del d["_sa_instance_state"]
         return d
+
+    def delete(self):
+        """delete the current instance from the storage"""
+        models.storage.delete(self)
