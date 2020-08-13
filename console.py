@@ -259,7 +259,6 @@ class HBNBCommand(cmd.Cmd):
         print("[", end="")
         print(", ".join(obj_list), end="")
         print("]")
-        print('ok')
 
     def help_all(self):
         """ Help information for the all command """
