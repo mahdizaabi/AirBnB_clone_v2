@@ -14,12 +14,9 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
-        """[summary]
-        Returns:
-            [type]: [description]
-        """
-        cities_list = []
-        for cts in models.storage.all(City).values():
-            if cities.state_id == self.id:
-                cities_list.append(cts)
-        return cities_list
+        """retrieve all citites objects"""
+        clist = []
+        for city in models.storage.all(City).values():
+            if city.state_id == self.id:
+                clist.append(city)
+        return clist
