@@ -7,9 +7,12 @@ from models.base_model import BaseModel
 import json
 from models.state import State
 from models.city import City
-
-
-classes = {"BaseModel": BaseModel, "City": City, "State": State}
+from models.user import User
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
+           "Place": Place, "Review": Review, "State": State, "User": User}
 
 
 class FileStorage():
