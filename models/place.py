@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 from models.review import Review
 
 
-class Place(BaseModel, base):
+class Place(BaseModel, Base):
     """ Class definition of class Objects """
 
     __tablename__ = "places"
