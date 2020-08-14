@@ -144,9 +144,8 @@ class HBNBCommand(cmd.Cmd):
         except Exception as e:
             return
         for item in shlex.split(args)[1:]:
-            if item.split("=")[1] is int:
+            if item.split("=")[1].isnumeric():
                 new_dic[item.split("=")[0]] = int(item.split("=")[1])
-                continue
             elif check_string(item.split("=")[1]):
                 sauvgarde = item.split("=")[1]
                 for i in item.split("=")[1]:
