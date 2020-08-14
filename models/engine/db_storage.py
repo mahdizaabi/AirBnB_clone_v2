@@ -51,6 +51,7 @@ class DBStorage:
             q += self.__session.query(State).all()
             q += self.__session.query(City).all()
             q += self.__session.query(User).all()
+            q += self.__session.query(Place).all()
         for obj in q:
             key = obj.__class__.__name__ + "." + obj.id
             d[key] = obj
