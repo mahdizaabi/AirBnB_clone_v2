@@ -17,9 +17,16 @@ import shlex
 def check_string(s):
     """function to check  for string"""
     for i in s:
-        if type(s) != str or type(s) != int or type(s) != float:
+        if type(s) is not str:
             return False
     return True
+
+
+def check_integer(s):
+    """function to check if integer"""
+    if type(s) is int:
+        return True
+    return False
 
 
 class HBNBCommand(cmd.Cmd):
@@ -137,7 +144,10 @@ class HBNBCommand(cmd.Cmd):
         except Exception as e:
             return
         for item in shlex.split(args)[1:]:
-            if check_string(item.split("=")[1]):
+            if check_integer(item.split("=")[1]):
+                new_dic[item.split("=")[0]] = int(item.split("=")[1])
+                continue
+            elif check_string(item.split("=")[1]):
                 sauvgarde = item.split("=")[1]
                 for i in item.split("=")[1]:
                     if i == '_':
@@ -150,8 +160,6 @@ class HBNBCommand(cmd.Cmd):
                         flag = 1
                 if flag == 0:
                     new_dic[item.split("=")[0]] = item.split("=")[1]
-            elif type(item.split("=")[1]) == int:
-                new_dic[item.split("=")[0]] = item.split("=")[1]
             elif item.split("=")[1].isnumeric():
                 if item.split("=")[1][0] == '0':
                     new_dic[item.split("=")[0]] = item.split("=")[1]
