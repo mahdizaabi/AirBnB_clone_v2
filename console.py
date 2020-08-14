@@ -153,8 +153,6 @@ class HBNBCommand(cmd.Cmd):
                 new_dic[item.split("=")[0]] = float(item.split("=")[1])
             elif item.split("=")[1].replace('.', '').isnumeric():
                 new_dic[item.split("=")[0]] = float(item.split("=")[1])
-            elif item.split("=")[1].replace('-', '').isnumeric():
-                new_dic[item.split("=")[0]] = int(item.split("=")[1])
             elif check_string(item.split("=")[1]):
                 sauvgarde = item.split("=")[1]
                 for i in item.split("=")[1]:
@@ -168,18 +166,9 @@ class HBNBCommand(cmd.Cmd):
                         flag = 1
                 if flag == 0:
                     new_dic[item.split("=")[0]] = item.split("=")[1]
-            elif item.split("=")[1].isnumeric():
-                if item.split("=")[1][0] == '0':
-                    new_dic[item.split("=")[0]] = item.split("=")[1]
-                else:
-                    x = int(item.split("=")[1])
-                    new_dic[item.split("=")[0]] = x
             else:
-                try:
-                    d = float(item.split("=")[1])
-                    new_dic[item.split("=")[0]] = d
-                except Exception as e:
-                    pass
+                pass
+
         new_dic['a'] = 1
         new_instance = HBNBCommand.classes[shlex.split(args)[0]](**new_dic)
         #storage.new(new_instance)
