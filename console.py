@@ -17,7 +17,7 @@ import shlex
 def check_string(s):
     """function to check  for string"""
     for i in s:
-        if not i.isalpha() and i not in['_', ' ', '\'', '"']:
+        if type(s) != str and i not in['_', ' ', '\'', '"']:
             return False
     return True
 
