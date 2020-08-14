@@ -145,8 +145,12 @@ class HBNBCommand(cmd.Cmd):
             return
         for item in shlex.split(args)[1:]:
             if item.split("=")[1].replace("-", "").isnumeric():
-                new_dic[item.split("=")[0]] = int(item.split("=")[1])
-            elif item.split("=")[1].replace(".", "").isnumeric():
+                if item.split("=")[1][0] == '0':
+                    new_dic[item.split("=")[0]] = str(item.split("=")[1])
+                else:
+                    new_dic[item.split("=")[0]] = int(item.split("=")[1])
+            elif item.split("=")[1].replace("-", "").replace(".", "")\
+                                                    .isnumeric():
                 new_dic[item.split("=")[0]] = float(item.split("=")[1])
             elif check_string(item.split("=")[1]):
                 sauvgarde = item.split("=")[1]
