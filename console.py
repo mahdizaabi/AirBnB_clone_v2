@@ -17,7 +17,7 @@ import shlex
 def check_string(s):
     """function to check  for string"""
     for i in s:
-        if type(s) != str:
+        if type(s) != str or type(s) != int or type(s) != float:
             return False
     return True
 
@@ -150,6 +150,8 @@ class HBNBCommand(cmd.Cmd):
                         flag = 1
                 if flag == 0:
                     new_dic[item.split("=")[0]] = item.split("=")[1]
+            elif type(item.split("=")[1]) == int:
+                new_dic[item.split("=")[0]] = item.split("=")[1]
             elif item.split("=")[1].isnumeric():
                 if item.split("=")[1][0] == '0':
                     new_dic[item.split("=")[0]] = item.split("=")[1]
