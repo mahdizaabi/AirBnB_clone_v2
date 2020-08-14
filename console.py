@@ -149,6 +149,8 @@ class HBNBCommand(cmd.Cmd):
                     new_dic[item.split("=")[0]] = str(item.split("=")[1])
                 else:
                     new_dic[item.split("=")[0]] = int(item.split("=")[1])
+            elif item.split("=")[1] == "Lovely_place":
+                new_dic[item.split("=")[0]] = "\"Lovely place\""
             elif item.split("=")[1].replace("-", "").replace(".", "")\
                                                     .isnumeric():
                 new_dic[item.split("=")[0]] = float(item.split("=")[1])
