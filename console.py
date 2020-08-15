@@ -154,6 +154,7 @@ class HBNBCommand(cmd.Cmd):
                 new_dic[item.split("=")[0]] = float(item.split("=")[1])
             elif check_string(item.split("=")[1]):
                 sauvgarde = item.split("=")[1]
+                flag = 0
                 for i in item.split("=")[1]:
                     if i == '_':
                         m = item.split("=")[1].replace('_', ' ')
