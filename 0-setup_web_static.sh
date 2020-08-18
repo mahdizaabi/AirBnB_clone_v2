@@ -8,6 +8,10 @@ fi
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 echo "Test Static deployement" > /data/web_static/releases/test/index.html
+if [ -L "/data/web_static/current" ]
+then
+    rm /data/web_static/current
+fi
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 chown -hR ubuntu:ubuntu /data/
 echo "
