@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 #deploy web_static for web server
-apt -y update
-apt install -y nginx
+if ! command -v nginx &> /dev/null
+then
+    apt -y update
+    apt install -y nginx
+fi
 mkdir -pv /data/web_static/releases/test/
 mkdir -pv /data/web_static/shared/
 echo "Test Static deployement" > /data/web_static/releases/test/index.html
