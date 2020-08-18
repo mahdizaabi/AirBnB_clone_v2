@@ -5,8 +5,8 @@ then
     apt -y update
     apt install -y nginx
 fi
-mkdir -pv /data/web_static/releases/test/
-mkdir -pv /data/web_static/shared/
+mkdir -p /data/web_static/releases/test/
+mkdir -p /data/web_static/shared/
 echo "Test Static deployement" > /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 chown -hR ubuntu:ubuntu /data/
