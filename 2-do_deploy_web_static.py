@@ -21,7 +21,7 @@ def do_deploy(archive_path):
         run('sudo mkdir -p {}{}/'.format(path, absname))
         run('sudo tar -xzf /tmp/{} -C {}{}/'.format(fname, path, absname))
         run('sudo rm /tmp/{}'.format(fname))
-        run('sudo mv {0}{1}/web_static/* {0}{1}/'.format(path, absname))
+        run("sudo mv {} /data/web_static/releases/{}/".format(path1, filename))
         run('sudo rm -rf {}{}/web_static'.format(path, absname))
         run('sudo rm -rf /data/web_static/current')
         run('sudo ln -s {}{}/ /data/web_static/current'.format(path, absname))
