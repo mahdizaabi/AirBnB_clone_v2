@@ -4,15 +4,16 @@ script that distributes an archive to a server
 """
 
 from fabric.api import put, run, env
-import os.path
+from os.path import exists
 env.hosts = ['35.185.121.162', '54.167.76.210']
 
 
 def do_deploy(archive_path):
     """distributes an archive to the web servers"""
-    if not os.path.isfile('archive_path'):
+    if exists(archive_path) is False:
         return False
     try:
+        path = ""
         fname = archive_path.split("/")[1]
         absname = fname.split(".")[:-4]
         path = "/data/web_static/releases/"
