@@ -12,19 +12,22 @@ def do_deploy(archive_path):
     """distributes an archive to the web servers"""
     if exists(archive_path) is False:
         return False
+
+    filename = archive_path.split("/")[-1].split(".")[0]
+    path = "/data/web_static/releases/{}/web_static/*".format(filename)
     try:
-        path = ""
-        fname = archive_path.split("/")[1]
-        absname = fname.split(".")[:-4]
-        path = "/data/web_static/releases/"
-        put(archive_path, '/tmp/')
-        run('sudo mkdir -p {}{}/'.format(path, absname))
-        run('sudo tar -xzf /tmp/{} -C {}{}/'.format(fname, path, absname))
-        run('sudo rm /tmp/{}'.format(fname))
-        run("sudo mv {} /data/web_static/releases/{}/".format(path1, filename))
-        run('sudo rm -rf {}{}/web_static'.format(path, absname))
-        run('sudo rm -rf /data/web_static/current')
-        run('sudo ln -s {}{}/ /data/web_static/current'.format(path, absname))
+        put(archive_path, "/tmp/")
+        run("sudo mkdir -p /data/web_static/releases/{}/".format(filename))
+        run("sudo tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}/".
+            format(filename, filename))
+        run("sudo rm /tmp/{}.tgz".format(filename))
+        run("sudo mv {} /data/web_static/releases/{}/".format(path, filename))
+        run("sudo rm -rf /data/web_static/releases/{}/web_static".
+            format(filename))
+        run("sudo rm -rf /data/web_static/current")
+        run("sudo ln -s /data/web_static/releases/{}/ /data/web_static/current"
+            .format(filename))
         return True
     except:
         return False
+    return True
