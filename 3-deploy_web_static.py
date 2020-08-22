@@ -24,6 +24,7 @@ def do_pack():
     except Exception as e:
         return None
 
+
 def do_deploy(archive_path):
     """Distribute an Archive to servers"""
     if not os.path.exists(archive_path):
@@ -37,14 +38,16 @@ def do_deploy(archive_path):
         run('sudo mv /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}/'.
             format(file_name, file_name))
-        run('sudo rm -rf /data/web_static/releases/{}/web_static'.format(file_name))
+        run('sudo rm -rf /data/web_static/releases/{}/web_static'
+            .format(file_name))
         run('sudo rm -rf /tmp/{}.tgz'.format(file_name))
         run('sudo rm -rf /data/web_static/current')
-        run('sudo ln -sf /data/web_static/releases/{}/ /data/web_static/current'.
-            format(file_name))
+        run('sudo ln -sf /data/web_static/releases/{}/ \
+            /data/web_static/current'.format(file_name))
         return True
     except:
         return False
+
 
 def deploy():
     """ creates and deploys static to the web server """
