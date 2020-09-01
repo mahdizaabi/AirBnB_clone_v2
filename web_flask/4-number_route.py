@@ -33,7 +33,7 @@ def python(text):
 @app.route('/number/<int:n>', strict_slashes=False)
 def check_for_integer(n):
     if type(n) is int:
-        return '%d' % n
+        return '%d is a number' % n
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='5000')
