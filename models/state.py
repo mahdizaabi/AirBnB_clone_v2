@@ -12,11 +12,12 @@ class State(BaseModel, Base):
     cities = relationship("City", backref="state", cascade="all, delete")
     __tablename__ = "states"
 
-    @property
-    def cities(self):
-        """retrieve all citites objects"""
-        clist = []
-        for city in models.storage.all(City).values():
-            if city.state_id == self.id:
-                clist.append(city)
-        return clist
+    if storage_t != "db":
+        @property
+        def cities(self):
+            """retrieve all citites objects"""
+            clist = []
+            for city in models.storage.all(City).values():
+                if city.state_id == self.id:
+                    clist.append(city)
+            return clist
