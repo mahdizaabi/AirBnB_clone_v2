@@ -30,7 +30,7 @@ def python(text):
     return 'Python %s' % text.replace('_', ' ')
 
 
-@app.route('/number/<int:n>')
+@app.route('/number/<int:n>', strict_slashes=False)
 def check_for_integer(n):
     if type(n) is int:
         return '%d' % n
