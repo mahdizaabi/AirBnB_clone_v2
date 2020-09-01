@@ -18,7 +18,7 @@ def hellox():
     return 'HBNB'
 
 
-@app.route('/hbnb/<text>')
+@app.route('/c/<text>', strict_slashes=False)
 def hex(text):
     """return html content"""
     return 'C %s' % text.replace('_', ' ')
