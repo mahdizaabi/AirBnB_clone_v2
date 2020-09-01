@@ -12,7 +12,6 @@ class State(BaseModel, Base):
     cities = relationship("City", backref="state", cascade="all, delete")
     __tablename__ = "states"
 
-    
     @property
     def cities(self):
         """retrieve all citites objects"""
