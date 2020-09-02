@@ -7,23 +7,12 @@ from models import storage
 from models.state import State
 app = Flask(__name__)
 
-if models.storage_t != "db":
-    @app.route('/cities_by_states', strict_slashes=False)
-    def display_not_db():
-        """desplay_citites_with_getter"""
-        listx = []
-        data = storage.all(State)
-        for state in data.values():
-            for city in state.cities:
-                listx.append(city)
-        return render_template('8-cities_by_states.html', listx=listx)
-
 
 @app.route('/cities_by_states', strict_slashes=False)
 def display_cities_states():
     """ desplay the citites coresponding to the states"""
-    data = storage.all('State').values()
-    return render_template('8-cities_by_states.html', data=data)
+    states = storage.all('State').values()
+    return render_template('8-cities_by_states.html', states=states)
 
 
 @app.teardown_appcontext
