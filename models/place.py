@@ -7,6 +7,7 @@ import sqlalchemy
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
+
 class Place(BaseModel, Base):
     """Define a place Class"""
     __tablename__ = 'places'
@@ -20,4 +21,3 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
- 
