@@ -16,7 +16,7 @@ def view_states():
 
 
 @app.teardown_appcontext
-def app_context():
+def app_context(fake):
     """teardown_appcontext"""
     storage.close()
 
